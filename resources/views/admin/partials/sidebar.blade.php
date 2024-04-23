@@ -50,25 +50,25 @@
                 </a>
             </li>
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive(['admin.plan.index', 'admin.plan.create', 'admin.plan.edit'])}}" href="{{route('admin.plan.index')}}">
                     <span><i class="lab la-buffer"></i></span>
                     <p>{{ translate('Membership Plan')}}</p>
                 </a>
-            </li>
+            </li> -->
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive('admin.user.*')}}" href="{{route('admin.user.index')}}">
                     <span><i class="las la-users-cog"></i></span>
                     <p>{{ translate('Manage Users')}}</p>
                 </a>
-            </li>
+            </li> -->
 
             <li class="sidebar-menu-title" data-text="{{ translate('Gateway & Contacts')}}">{{ translate('Gateway & Contacts')}}</li>
             @php
                 $isGatewayActive = request()->routeIs('admin.sms.gateway.sms.api', 'admin.sms.gateway.android', 'admin.gateway.whatsapp.device', 'admin.mail.list',  'admin.mail.edit', 'admin.template.index');
             @endphp
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{request()->routeIs('admin.payment.method.*') && !request()->routeIs('admin.manual.payment.')  ? "active" :"" }}" data-bs-toggle="collapse" href="#collapsePayment"
                     role="button" aria-expanded="true" aria-controls="collapsePayment">
                     <span><i class="las la-money-check"></i></span>
@@ -93,7 +93,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
             <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isGatewayActive ? "active" :"" }}" data-bs-toggle="collapse" href="#collapseGatewaySetting"
                    role="button" aria-expanded="true" aria-controls="collapseGatewaySetting">
@@ -127,7 +127,7 @@
                 ];
                 $isContactActive = request()->routeIs($contactRouteNames);
             @endphp
-            
+
             <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isContactActive ? "active" :"" }}" data-bs-toggle="collapse" href="#collapseContact"
                 role="button" aria-expanded="true" aria-controls="collapseContact">
@@ -135,7 +135,7 @@
                     <p>{{ translate('Contact')}}  <small><i class="las la-angle-down"></i></small>
                     </p>
                 </a>
-            
+
                 <div class="side-menu-dropdown collapse {{$isContactActive ? "show" :"" }}" id="collapseContact">
                     <ul class="sub-menu">
                         <li class="sub-menu-item">
@@ -160,12 +160,12 @@
             </li>
 
             <li class="sidebar-menu-title" data-text="{{ translate('SMS, Whatsapp & Email Activities')}}">{{ translate('SMS & WhatsApp & Email Activities')}}</li>
-            
+
             @php
                 $isTemplatesActive = request()->routeIs('admin.template.email.list.user', 'admin.template.email.list.own', 'admin.template.email.list.default', 'admin.template.email.list.global', 'admin.template.user', 'admin.template.own', 'admin.template.email.create', 'admin.template.email.edit', 'admin.mail.templates.edit');
             @endphp
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isTemplatesActive ? "active" :"" }}" data-bs-toggle="collapse" href="#collapseTemplatesTexting"
                 role="button" aria-expanded="true" aria-controls="collapseTemplatesTexting">
                     <span><i class="las la-box"></i></span>
@@ -194,7 +194,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
             <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isSmsActive ? "active" :"" }}" data-bs-toggle="collapse" href="#collapseSmsTexting"
@@ -333,10 +333,10 @@
                     </ul>
                 </div>
             </li>
-            
-            <li class="sidebar-menu-title" data-text="{{ translate('Settings & Frontend')}}">{{ translate('Settings & Frontend')}}</li>
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-title" data-text="{{ translate('Settings & Frontend')}}">{{ translate('Settings & Frontend')}}</li> -->
+
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{request()->routeIs('admin.general.setting.*')}}" data-bs-toggle="collapse" href="#collapseSetting"
                     role="button" aria-expanded="true" aria-controls="collapseSetting">
                     <span><i class="las la-tools"></i></span>
@@ -395,14 +395,14 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
 
             @php
                 $isCreditLogsActive = request()->routeIs('admin.report.credit.index','admin.report.credit.search','admin.report.whatsapp.index','admin.report.whatsapp.search', 'admin.report.email.credit.index','admin.report.email.credit.search');
             @endphp
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isCreditLogsActive  ? "active" :""}} " data-bs-toggle="collapse" href="#collapseCreditLogs"
                    role="button" aria-expanded="true" aria-controls="collapseCreditLogs">
                     <span><i class="las la-history"></i></span>
@@ -432,13 +432,13 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
             @php
                 $isReportsActive = request()->routeIs('admin.report.transaction.index','admin.report.transaction.search','admin.report.subscription.index','admin.report.subscription.search','admin.report.subscription.search.date', 'admin.report.payment.index', 'admin.report.payment.detail');
             @endphp
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{$isReportsActive ? "active" :"" }}" data-bs-toggle="collapse" href="#collapseRecords"
                     role="button" aria-expanded="true" aria-controls="collapseRecords">
                     <span><i class="las la-bars"></i></span>
@@ -471,9 +471,9 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{request()->routeIs('admin.frontend.sections.*') ?"active" :""}}" data-bs-toggle="collapse" href="#collapseFrontend"
                     role="button" aria-expanded="true" aria-controls="collapseFrontend">
                     <span><i class="las la-globe-americas"></i></span>
@@ -496,16 +496,16 @@
                          @endforeach
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="sidebar-menu-title" data-text="{{ translate('SUPPORT & OTHERS')}}">{{ translate('SUPPORT & OTHERS')}}</li>
+            <!-- <li class="sidebar-menu-title" data-text="{{ translate('SUPPORT & OTHERS')}}">{{ translate('SUPPORT & OTHERS')}}</li> -->
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive(['admin.language.*'])}}" href="{{route('admin.language.index')}}">
                     <span><i class="las la-language"></i></span>
                     <p>{{ translate('Manage Language')}}</p>
                 </a>
-            </li>
+            </li> -->
 
             <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive('admin.spam.word.index')}}" href="{{route('admin.spam.word.index')}}">
@@ -515,7 +515,7 @@
             </li>
 
 
-             <li class="sidebar-menu-item">
+             <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link collapsed {{request()->routeIs('admin.support.ticket.*') ? "active" :""}} " data-bs-toggle="collapse" href="#collapseTicket"
                     role="button" aria-expanded="true" aria-controls="collapseTicket">
                     <span><i class="las la-ticket-alt"></i></span>
@@ -573,27 +573,27 @@
 
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive('admin.generate.api.key')}}" href="{{route('admin.generate.api.key')}}">
                     <span><i class="las la-key"></i></span>
                     <p>{{ translate('Generate Key')}}</p>
                 </a>
-            </li>
+            </li> -->
 
-            <li class="sidebar-menu-item">
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive('api.document')}}" href="{{route('api.document')}}">
                     <span><i class="las la-code"></i></span>
                     <p>{{ translate('API Document')}}</p>
                 </a>
-            </li>
-            <li class="sidebar-menu-item">
+            </li> -->
+            <!-- <li class="sidebar-menu-item">
                 <a class="sidebar-menu-link {{menuActive('admin.general.setting.system.info') }}" href="{{route('admin.general.setting.system.info')}}">
                     <span><i class="las la-microchip"></i></span>
                     <p>{{ translate('System Info')}}</p>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </aside>

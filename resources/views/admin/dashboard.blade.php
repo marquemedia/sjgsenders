@@ -17,8 +17,8 @@
     <div class="col-md-6">
         <div class="card banner-card plan-card">
             <h3>{{translate('Welcome Back')}}, {{auth()->guard('admin')->user()->name}}!!</h3>
-            <p>{{translate('To change any of plans for user subscription, simply click here to explore your options.')}}</p>
-            <a href="{{route('admin.plan.index')}}" class="i-btn primary--btn btn--lg">{{translate('Membership Plan')}}</a>
+            <!-- <p>{{translate('To change any of plans for user subscription, simply click here to explore your options.')}}</p> -->
+            <!-- <a href="{{route('admin.plan.index')}}" class="i-btn primary--btn btn--lg">{{translate('Membership Plan')}}</a> -->
         </div>
     </div>
 
@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-5">
+        <!-- <div class="col-xl-4 col-lg-5">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">{{ translate('All User')}}</h4>
@@ -285,9 +285,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-xl-8 col-lg-7">
+        <!-- <div class="col-xl-8 col-lg-7">
             <div class="card amount">
                 <div class="card-header">
                     <h4 class="card-title">{{ translate('Amount')}}</h4>
@@ -318,7 +318,7 @@
                     <div id="revenueChart" class="charts-height"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-xl-12">
             <div class="card">
@@ -332,7 +332,7 @@
             </div>
         </div>
 
-        <div class="col-xl-6">
+        <!-- <div class="col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">{{ translate('New User')}}</h4>
@@ -382,9 +382,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-xl-6">
+        <!-- <div class="col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">{{ translate('Latest Payment Log')}}</h4>
@@ -443,7 +443,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 

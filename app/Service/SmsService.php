@@ -33,7 +33,7 @@ class SmsService
     /**
      * @param SMSlog $smsLog
      * @return void
-     */ 
+     */
     public function sendSmsByOwnGateway($smsLog, $diffInSeconds = null): void
     {
         if(is_null($smsLog->android_gateway_sim_id) && !is_null($smsLog->api_gateway_id)){
@@ -89,9 +89,9 @@ class SmsService
 
 	public function smsLogStatusUpdate(int $status, array $smsLogIds, GeneralSetting $general, ?int $sms_id): void
 	{
-        
+
         $general = GeneralSetting::first();
-       
+
 		foreach(array_reverse($smsLogIds) as $smsLogId){
 			$smslog = SMSlog::find($smsLogId);
 
@@ -103,10 +103,10 @@ class SmsService
             $user = User::find($smslog->user_id);
 
             if($status == SMSlog::PENDING && $user){
-                
+
                 $messages = str_split($smslog->message,$wordLength);
                 $totalCredit = count($messages);
-                
+
                 if($user->credit >= $totalCredit){
                     $smslog->status = $status;
                     if($smslog->api_gateway_id) {
@@ -117,19 +117,19 @@ class SmsService
             }else{
                 $smslog->status = $status;
                 if($sms_id) {
-                    
+
                     $smslog->api_gateway_id = null;
                     $smslog->android_gateway_sim_id = $sms_id;
                     $smslog->save();
                 }
                 if($smslog->api_gateway_id) {
                     ProcessSms::dispatch($smslog, (array)$smslog->smsGateway()->first()->sms_gateways, $smslog->smsGateway()->first());
-                } 
+                }
 
             }
 
 			$smslog->update();
-           
+
 		}
 	}
 
@@ -141,11 +141,11 @@ class SmsService
      */
     public function processNumber(Request $request, array &$allContactNumber): void
     {
-        
+
         if($request->has('number')){
             $contactNumber       = preg_replace('/[ ,]+/', ',', trim($request->input('number')));
             $allContactNumber[]  = explode(",",$contactNumber);
-           
+
         }
     }
 
@@ -159,22 +159,22 @@ class SmsService
      */
     public function processGroupId(Request $request, array &$allContactNumber, array &$numberGroupName, $userId = null): void
     {
-        
+
         if ($request->has('group_id')) {
-           
+
             $contact = Contact::query();
             $contact->whereIn('group_id', $request->input('group_id'));
             if ($request->input("group_logic")) {
                 $attributeName = $request->input("attribute_name");
                 $logic = $request->input("logic");
-            
+
                 if (strpos($attributeName, "::") !== false) {
                     $attributeParts = explode("::", $attributeName);
                     $attributeType = $attributeParts[1];
-                    
+
                     if ($attributeType == GeneralSetting::DATE) {
                         $startDate = Carbon::parse($logic);
-            
+
                         if ($request->has('logic_range')) {
                             $endDate = Carbon::parse($request->input('logic_range'));
                             $contact = $contact->get()->filter(function ($contact) use ($startDate, $endDate, $attributeParts) {
@@ -190,18 +190,18 @@ class SmsService
                     } elseif ($attributeType == GeneralSetting::BOOLEAN) {
 
                         $logicValue = filter_var($logic, FILTER_VALIDATE_BOOLEAN);
-                        
+
                         $contact = $contact->get()->filter(function ($contact) use ($attributeParts, $logicValue) {
                             $attrValue = filter_var($contact->attributes->{$attributeParts[0]}->value, FILTER_VALIDATE_BOOLEAN);
                             return $attrValue === $logicValue;
                         });
-                    } elseif ($attributeType == GeneralSetting::NUMBER) { 
+                    } elseif ($attributeType == GeneralSetting::NUMBER) {
 
                         $numericLogic = filter_var($logic, FILTER_VALIDATE_FLOAT);
-                    
+
                         if ($request->has('logic_range')) {
                             $numericRange = filter_var($request->input('logic_range'), FILTER_VALIDATE_FLOAT);
-                            
+
                             $contact = $contact->get()->filter(function ($contact) use ($attributeParts, $numericLogic, $numericRange) {
                                 $attrValue = filter_var($contact->attributes->{$attributeParts[0]}->value, FILTER_VALIDATE_FLOAT);
                                 return $attrValue >= $numericLogic && $attrValue <= $numericRange;
@@ -212,9 +212,9 @@ class SmsService
                                 return $attrValue == $numericLogic;
                             });
                         }
-                    } elseif ($attributeType == GeneralSetting::TEXT) { 
+                    } elseif ($attributeType == GeneralSetting::TEXT) {
                         $textLogic = $request->input('logic');
-                    
+
                         $contact = $contact->get()->filter(function ($contact) use ($attributeParts, $textLogic) {
                             $attrValue = $contact->attributes->{$attributeParts[0]}->value;
                             return stripos($attrValue, $textLogic) !== false;
@@ -224,7 +224,7 @@ class SmsService
                     $contact->where($attributeName, 'like', "%$logic%");
                 }
             }
-            
+
             if (!is_null($userId)) {
                 $contact->where('user_id', $userId);
             } else {
@@ -235,7 +235,7 @@ class SmsService
                 $allContactNumber[] = $contact->pluck("$request->channel".'_contact')->toArray();
                 $numberGroupName    = $contact->pluck('id', "$request->channel".'_contact')->toArray();
 
-                
+
             }
         }
     }
@@ -249,21 +249,21 @@ class SmsService
      */
     public function processFile(Request $request, array &$allContactNumber, array &$numberGroupName): void
     {
-       
+
         if($request->has('file')){
             $service = new FileProcessService();
             $extension = strtolower($request->file('file')->getClientOriginalExtension());
-            
+
             if($extension == "csv"){
 
                 $response           = $service->processCsv($request->file('file'));
                 $allContactNumber[] = array_keys($response);
                 $numberGroupName    = $numberGroupName + $response;
-               
+
             }
 
             if($extension == "xlsx"){
-                
+
                 $response =  $service->processExel($request->file('file'));
                 $allContactNumber[] = array_keys($response);
                 $numberGroupName = $numberGroupName + $response;
@@ -300,9 +300,9 @@ class SmsService
      */
     public function getFinalContent(string $value, array $numberGroupName, string $message): string
     {
-        
+
         $finalContent = textSpinner(str_replace('{{name}}',$value, offensiveMsgBlock($message)));
-        
+
         if (array_key_exists($value,$numberGroupName)) {
 
             $finalContent = str_replace('{{name}}', $numberGroupName ? $numberGroupName[$value]:$value, offensiveMsgBlock($message));
@@ -321,16 +321,16 @@ class SmsService
      * @return array
      */
     public function prepParams(string $contact, StoreSMSRequest $request, array $numberGroupName, ?int $apiGatewayId, ?int $simId, ?int $userId = null): array
-    {   
-       
+    {
+
         $generalSetting = GeneralSetting::first();
         $contact        = filterContactNumber($contact);
         $value          = array_key_exists($contact, $numberGroupName) ? $numberGroupName[$contact] : $contact;
         $setTimeInDelay = $request->input('schedule') == 2 ? $request->input('schedule_date') : Carbon::now();
         $wordLength     = $request->input('smsType') == "plain" ? $generalSetting->sms_word_text_count : $generalSetting->sms_word_unicode_count;
-        
+
         $finalContent   = $this->getFinalContent($value, $numberGroupName, $request->input('message'));
-        
+
         return  [
             'to'                     => $contact,
             'word_length'            => $wordLength,
@@ -378,11 +378,11 @@ class SmsService
      */
     public function sendSMS(array $contactNewArray, GeneralSetting $general, $smsGateway, StoreSMSRequest $request, array $numberGroupName, array $allAvailableSims, ?int $userId = null): void
     {
-        
+
         $apiGatewayId = null;
 
         if($userId ? auth()->user()->sms_gateway == 1 : $general->sms_gateway == 1) {
-           
+
             $apiGatewayId = (int) $smsGateway->id;
 
             foreach ($contactNewArray as $value) {
@@ -394,30 +394,30 @@ class SmsService
                 }
             }
         } else {
-            
+
             if($request->input("android_gateways_id") == "-1") {
-                
+
                 foreach ($contactNewArray as $index_key => $number) {
-                    
+
                     foreach ($allAvailableSims as $key => $sim_id){
-                      
+
                         unset($allAvailableSims[$key]);
-                        
+
                         if(empty($allAvailableSims)) {
-                            
+
                             $allAvailableSims = AndroidApiSimInfo::where("status", AndroidApiSimInfo::ACTIVE)->pluck("id")->toArray();
                         }
                         break;
-                        
+
                     }
-                   
+
                     $log = $this->saveSMSLog($this->prepParams((string)$number, $request, $numberGroupName, null, $sim_id, $userId));
                     if($log->status == 1) {
 
                         $this->sendSmsByOwnGateway($log);
                     }
                 }
-                
+
             } else {
 
                 foreach ($contactNewArray as $value) {

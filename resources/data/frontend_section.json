@@ -1,0 +1,215 @@
+{
+    "banner": {
+        "builder": true,
+        "name": "Banner Section",
+        "fixed_content": {
+            "images":{
+                "background_image":{
+                    "size":"3000x2000"
+                },
+                "banner_image":{
+                    "size":"1500x2180"
+                }
+
+            },
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "btn_name": "text",
+            "btn_url": "text",
+            "video_btn_name": "text",
+            "video_url": "text"
+        }
+    },
+    "client": {
+        "builder": true,
+        "name": "Client Section",
+        "fixed_content": {
+            "sub_heading": "text",
+            "heading": "text"
+        }
+    },
+    "about": {
+        "builder": true,
+        "name": "About Section",
+        "fixed_content": {
+            "images":{
+                "about_image":{
+                    "size":"1600x1000"
+                },
+                "about_breadcrumb_image":{
+                    "size":"1250x830"
+                }
+            },
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "btn_name": "text",
+            "btn_url": "text"
+        },
+        "element_content": {
+            "icon": "icon",
+            "title": "text",
+            "sub_title": "text"
+        }
+    },
+    "process": {
+        "builder": true,
+        "name": "Process Section",
+        "fixed_content": {
+           
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text"
+          
+        },
+        "element_content": {
+           
+            "heading": "text",
+            "sub_heading": "text",
+            "images":{
+                "card_image":{
+                    "size":"545x260"
+                }
+            }
+        }
+    },
+    "feature": {
+        "builder": true,
+        "name": "Feature Section",
+        "fixed_content": {
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "images":{
+                "feature_breadcrumb_image":{
+                    "size":"1250x830"
+                }
+            }
+        },
+        "element_content": {
+            "title": "text",
+            "description": "textarea",
+            "feature_icon": "icon",
+            "btn_name": "text",
+            "btn_url": "text"
+        }
+    },
+    "cta": {
+        "builder": true,
+        "name": "CTA Section",
+        "fixed_content": {
+            
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "btn_name": "text",
+            "btn_url": "text"
+        },
+        "element_content": {
+            "title": "text",
+            "description": "text",
+            "images":{
+                "card_image":{
+                    "size":"96x96"
+                }
+            }
+        }
+    },
+    "over_view": {
+        "builder": true,
+        "name": "Overview Section",
+        "fixed_content": {
+            "images":{
+                "background_image":{
+                    "size":"1900x550"
+                },
+                "overview_image":{
+                    "size":"1910x910"
+                },
+                "overview_min_image":{
+                    "size":"800x510"
+                }
+            },
+            
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "btn_left_name": "text",
+            "btn_left_url": "text",
+            "btn_right_name": "text",
+            "btn_right_url": "text"
+        }
+    },
+    "pricing_plan": {
+        "builder": true,
+        "name": "Pricing Plan Section",
+        "fixed_content": {
+            "sub_heading": "text",
+            "heading": "text",
+            "description": "text",
+            "images":{
+                "plan_breadcrumb_image":{
+                    "size":"1250x830"
+                }
+            }
+        }
+    },
+    "faq": {
+        "builder": true,
+        "name": "FAQ Section",
+        "fixed_content": {
+            "heading": "text",
+            "sub_heading": "text",
+            "images":{
+               
+                "faq_breadcrumb_image":{
+                    "size":"1250x830"
+                }
+            },
+            "message_icon": "icon",
+            "message_title": "text",
+            "message_description": "textarea",
+            "btn_left_name": "text",
+            "btn_left_url": "text",
+            "btn_right_name": "text",
+            "btn_right_url": "text"
+        },
+        "element_content": {
+            "question": "text",
+            "answer": "text"
+        }
+    },
+    "policy_pages": {
+        "builder": true,
+        "name": "Policy Pages",
+        "element_content": {
+            "title": "text",
+            "details": "texteditor"
+        }
+    },
+    "social_icon": {
+        "builder": true,
+        "name": "Social Icons",
+        
+        "element_content": {
+            "title": "text",
+            "social_icon": "icon",
+            "url": "text"
+        }
+    },
+    "footer": {
+        "builder": true,
+        "name": "Footer Section",
+        "fixed_content": {
+            "text": "text",
+          
+            "copyright_text": "text",
+            "images":{
+                "background_image":{
+                    "size":"1920x1060"
+                }
+            }
+        }
+    }
+}

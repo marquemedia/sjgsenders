@@ -1,0 +1,11 @@
+/public/hot
+/public/storage
+/node_modules
+/resources/lang/
+/storage
+/vendor
+/lang
+/aseets/file
+.env
+/.idea
+/.vscode
